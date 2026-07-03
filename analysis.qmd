@@ -17,17 +17,21 @@ The `storms` dataset in `dplyr` tracks Atlantic basin tropical cyclones. Below i
 
 ```{r}
 #| label: named-storms-plot
-#| fig-cap: "Number of named storms per year in the Atlantic basin."
+#| fig-cap: "Number of tropical depressions, tropical storms, and hurricanes per year in the Atlantic basin."
 storms %>%
-  distinct(year, name) %>%
-  count(year) %>%
-  ggplot(aes(x = year, y = n)) +
-  geom_line(color = "steelblue", size = 1) +
-  geom_point(color = "darkblue", size = 2) +
+  filter(status %in% c("tropical depression", "tropical storm", "hurricane")) %>%
+  distinct(year, status, name) %>%
+  count(year, status) %>%
+  ggplot(aes(x = year, y = n, fill = status)) +
+  geom_area(position = "stack") +
+  scale_fill_manual(values = c("tropical depression" = "lightblue",
+                               "tropical storm" = "orange",
+                               "hurricane" = "darkred")) +
   labs(
-    title = "Annual Frequency of Named Storms",
+    title = "Annual Frequency of Storm Types",
     x = "Year",
-    y = "Number of Unique Named Storms"
+    y = "Number of Unique Storms",
+    fill = "Storm Type"
   ) +
   theme_minimal()
 ```
