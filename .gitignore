@@ -1,0 +1,25 @@
+# Quarto build output directories
+/_site/
+/_book/
+
+# Quarto cache and freeze
+/.quarto/
+/_freeze/
+*_cache/
+*_files/
+
+# R-specific
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# knitr cache
+cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NOTE: .html files are intentionally NOT ignored

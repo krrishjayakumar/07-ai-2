@@ -1,0 +1,33 @@
+---
+title: "Exploring Storms"
+author: "krrishjayakumar"
+execute:
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+# Storms Analysis
+
+The `storms` dataset in `dplyr` tracks Atlantic basin tropical cyclones. Below is the count of unique named storms per year.
+
+```{r}
+#| label: named-storms-plot
+#| fig-cap: "Number of named storms per year in the Atlantic basin."
+storms %>%
+  distinct(year, name) %>%
+  count(year) %>%
+  ggplot(aes(x = year, y = n)) +
+  geom_line(color = "steelblue", size = 1) +
+  geom_point(color = "darkblue", size = 2) +
+  labs(
+    title = "Annual Frequency of Named Storms",
+    x = "Year",
+    y = "Number of Unique Named Storms"
+  ) +
+  theme_minimal()
+```
